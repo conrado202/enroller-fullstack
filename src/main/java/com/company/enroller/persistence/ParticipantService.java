@@ -2,6 +2,9 @@ package com.company.enroller.persistence;
 
 import com.company.enroller.model.Participant;
 import org.hibernate.Transaction;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.config.authentication.PasswordEncoderParser;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.util.Collection;
@@ -10,6 +13,11 @@ import java.util.Collection;
 public class ParticipantService {
 
     DatabaseConnector connector;
+    
+//    Sprawdza i automatyczne linkuje, czy mamy konfiguracje, dla kontenera autowired.
+//    Spring dba o to by w polu PasswordEncodera sie dobrze polaczylo  
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     public ParticipantService() {
         connector = DatabaseConnector.getInstance();
@@ -24,6 +32,11 @@ public class ParticipantService {
     }
 
     public Participant add(Participant participant) {
+    	// Hashowanie hasel za pomoca PasswordEncodera
+    	String rawPassword = participant.getPassword();
+    	String encodedPassword = this.passwordEncoder.encode(rawPassword);
+    	participant.setPassword(encodedPassword);
+    	
         Transaction transaction = connector.getSession().beginTransaction();
         connector.getSession().save(participant);
         transaction.commit();
