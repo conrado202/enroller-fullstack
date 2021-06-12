@@ -51,7 +51,11 @@
                     })
                     .catch(response => {
                         // this.errorMessage = "Nie udalo sie zarejestrowac konta";
-                        this.errorMessage = response.bodyText;
+                        if(response.status == 402){
+                            
+                        } else if (response.status == 402){
+                            this.errorMessage = response.bodyText;
+                        }
                     });
             },
             logout() {

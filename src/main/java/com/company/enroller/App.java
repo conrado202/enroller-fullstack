@@ -13,8 +13,10 @@ public class App {
         SpringApplication.run(App.class, args);
     }
     
-    // Adnotacja Bean dotyczy naszego kontenera IoC
-    @Bean			// Usluga, z ktorej mozna korzystac w naszej aplikacji 
+//    Adnotacja Bean dotyczy naszego kontenera IoC
+//    W naszym kontenerze IoC jesli ktos zapyta o PasswordEncoder to ma sie wyciagnac (wstrzyknac) BCryptPasswordEncoder
+//	  Usluga, z ktorej mozna korzystac w naszej aplikacji
+    @Bean			 
     public PasswordEncoder passwordEncoder() {
     	return new BCryptPasswordEncoder();
     }
