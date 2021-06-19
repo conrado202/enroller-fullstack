@@ -26,12 +26,15 @@
         props: ['username'],
         data() {
             return {
-                meetings: []
+                meetings: this.$http.get("meetings").then(response =>{ this.meetings = response.body;
+                })
             };
         },
         methods: {
             addNewMeeting(meeting) {
-                this.meetings.push(meeting);
+                this.$http.post("meetings",meeting).then(() => this.$http.get("meetings").then(response => { this.meetings = response.body;
+                })
+                );
             },
             addMeetingParticipant(meeting) {
                 meeting.participants.push(this.username);
@@ -41,6 +44,10 @@
             },
             deleteMeeting(meeting) {
                 this.meetings.splice(this.meetings.indexOf(meeting), 1);
+                this.$http.post("meetings",meeting).then(() => this.$http.get("meetings").then(response => { this.meetings = response.body;
+                })
+                );
+
             }
         }
     }

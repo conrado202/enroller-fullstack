@@ -19,10 +19,10 @@ public class Participant {
     private String password;
 
 //    @JsonIgnore
-    @ManyToMany
-    @JoinTable(name = "meeting_participant", joinColumns = {
-            @JoinColumn(name = "participant_login")}, inverseJoinColumns = {@JoinColumn(name = "meeting_id")})
-    Set<Meeting> meetings = new HashSet<>();
+//    @ManyToMany
+//    @JoinTable(name = "meeting_participant", joinColumns = {
+//    @JoinColumn(name = "participant_login")}, inverseJoinColumns = {@JoinColumn(name = "meeting_id")})
+//    Set<Meeting> meetings = new HashSet<>();
 
     public String getLogin() {
         return login;

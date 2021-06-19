@@ -25,13 +25,15 @@ public class Meeting {
     private String date;
 
 //    @JsonIgnore
-    @ManyToMany(mappedBy = "meetings")
+    @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+    @JoinTable(name = "meeting_participant", joinColumns = { @JoinColumn(name = "meeting_id") }, inverseJoinColumns = {
+    @JoinColumn(name = "participant_login") })
     Set<Participant> participants = new HashSet<>();
     
-	@JsonIgnore
-	@ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
-	@JoinTable(name = "meeting_participant", joinColumns = { @JoinColumn(name = "meeting_id") }, inverseJoinColumns = {
-			@JoinColumn(name = "participant_login") })
+////	@JsonIgnore
+//	@ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE }, mappedBy = "meetings")
+//	@JoinTable(name = "meeting_participant", joinColumns = { @JoinColumn(name = "meeting_id") }, inverseJoinColumns = {
+//			@JoinColumn(name = "participant_login") })
 
     public long getId() {
         return id;
