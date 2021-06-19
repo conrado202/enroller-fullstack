@@ -40,13 +40,15 @@
                 meeting.participants.push(this.username);
             },
             removeMeetingParticipant(meeting) {
-                meeting.participants.splice(meeting.participants.indexOf(this.username), 1);
+                // meeting.participants.splice(meeting.participants.indexOf(this.username), 1);
+                meeting.participants = meeting.participants.filter((participant) => {return participant !== this.user;
+            });
             },
             deleteMeeting(meeting) {
-                this.meetings.splice(this.meetings.indexOf(meeting), 1);
-                this.$http.post("meetings",meeting).then(() => this.$http.get("meetings").then(response => { this.meetings = response.body;
-                })
-                );
+                // this.meetings.splice(this.meetings.indexOf(meeting), 1);
+                this.meetings = this.meetings.filter((event) => {return event !== meeting;
+            });
+            
 
             }
         }
