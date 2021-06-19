@@ -2,7 +2,7 @@
   <div id="app">
     <h1>
       <img src="./assets/logo.svg" alt="Enroller" class="logo">
-      System do zapisów na zajęcia
+      System do zapisów na spotkania biznesowe
     </h1>
     <div v-if="authenticatedUsername">
       <h2>Witaj {{ authenticatedUsername }}!
